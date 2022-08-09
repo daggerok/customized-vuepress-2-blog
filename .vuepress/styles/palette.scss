@@ -1,0 +1,11 @@
+:root {
+  --c-brand: rgb(0, 157, 255);
+  --c-brand-light: #7b83ff;
+  --sidebar-width-mobile: calc(var(--sidebar-width) * 0.5);
+}
+
+html.dark {
+  --c-brand: rgb(0, 157, 255);
+  --c-brand-light: #7b83ff;
+  --sidebar-width-mobile: calc(var(--sidebar-width) * 0.5);
+}

@@ -1,0 +1,19 @@
+<script setup>
+import ParentLayout from '@vuepress/theme-default/lib/client/layouts/Layout.vue';
+import Footer from '@/components/Footer.vue';
+</script>
+
+<template>
+  <div class="wrapper">
+    <div class="content-wrapping-section">
+      <ParentLayout/>
+    </div>
+    <div class="footer">
+      <Footer/>
+    </div>
+  </div>
+</template>
+
+<style lang="scss">
+
+</style>

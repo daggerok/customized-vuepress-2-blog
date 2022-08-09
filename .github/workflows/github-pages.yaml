@@ -1,0 +1,37 @@
+name: GitHub Pages
+on:
+  workflow_dispatch:
+    inputs:
+      trigger:
+        description: Type m to triggre manual jobs
+        required: false
+        default: ''
+  push:
+env:
+  NODE_VERSION: 18.4.0
+jobs:
+  github-pages:
+    name: Deploy to GitHub pages
+    if: github.event.inputs.trigger == ''
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
+        id: ci
+        with:
+          path: |
+            ~/.npm
+            ~/.node
+            ~/.m2/repository
+            !~/.m2/repository/com/gituhb/daggerok
+          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/pom.xml', '**/package.json', '**/package-lock.json') }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - run: npm i -E
+      - run: npm run build-github-pages
+      - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4.4.0
+        with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: .vuepress/dist # The folder the action should deploy.

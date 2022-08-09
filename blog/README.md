@@ -1,0 +1,7 @@
+---
+hero: false
+---
+
+# Blog
+
+<Posts />

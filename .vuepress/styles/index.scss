@@ -1,0 +1,61 @@
+:root {
+  scroll-behavior: smooth;
+}
+
+main > header > img {
+  border-radius: 50%;
+}
+
+// fix with for non main / home pages:
+
+main.page {
+  min-height: 90vh !important;
+  .theme-default-content {
+    min-width: 80vw;
+  }
+}
+
+@media screen and (min-width: 1500px) {
+  main.page {
+    min-height: 90vh !important;
+    .theme-default-content {
+      min-width: 75vw;
+    }
+  }
+}
+
+@media screen and (max-width: 1499px) {
+  main.page {
+    min-height: 90vh !important;
+    .theme-default-content {
+      min-width: 70vw;
+    }
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  main.page {
+    min-height: 90vh !important;
+    .theme-default-content {
+      min-width: 65vw;
+    }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  main.page {
+    min-height: 90vh !important;
+    .theme-default-content {
+      min-width: 60vw;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  main.page {
+    min-height: 90vh !important;
+    .theme-default-content {
+      min-width: 55vw;
+    }
+  }
+}
