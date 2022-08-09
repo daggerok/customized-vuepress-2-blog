@@ -1,5 +1,6 @@
 <template>
-  <div class="footer">Copyright © 2022-present Maksim Kostromin</div>
+  <div class="footer"> Maksim Kostromin © 2022-present</div>
+  <div class="footer">Please, make sure to copyright me!</div>
 </template>
 
 <script>

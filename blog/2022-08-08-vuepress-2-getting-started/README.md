@@ -1,0 +1,175 @@
+# VuePress 2.x Getting Started
+
+In this guide we will be looking into VuePress 2.x which currently is in beta but very promising.
+We will build simple customized blog with home page only. Using this skeleton can be just enough for many people who would like to quickly
+get something easy to use, working, fast and very nice looking...
+
+[[toc]]
+
+## Install NodeJS
+
+VuePress required NodeJS to be installed. Please check [download page](https://nodejs.org/uk/download/) to see how to install it on your
+operating system.
+
+I personally always prefer use command line:
+
+<CodeGroup>
+  <CodeGroupItem title="macOS Homebrew" active>
+
+```bash:no-line-numbers
+brew reinstall node
+```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Windows scoop">
+
+```batch:no-line-numbers
+scoop install nodejs
+```
+
+  </CodeGroupItem>
+</CodeGroup>
+
+::: tip
+See more options [here](https://nodejs.org/uk/download/package-manager/)
+:::
+
+## Initialize project
+
+Create (for example: `customized-vuepress-2-blog`) project folder and initialize NodeJS project in it:
+
+<CodeGroup>
+  <CodeGroupItem title="Unix bash" active>
+
+```bash:no-line-numbers
+mkdir ~/customized-vuepress-2-blog && cd $_
+npm init -y
+```
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Windows batch">
+
+```batch:no-line-numbers
+mkdir %USERPROFILE%\customized-vuepress-2-blog
+cd %USERPROFILE%\customized-vuepress-2-blog
+npm init -y
+```
+
+  </CodeGroupItem>
+</CodeGroup>
+
+## Install minimal require software
+
+Let's install vuepress 2.x as our main blog engine, rimraf to clean files and folders, cross-env and NodeJS types (see `package.json` file):
+
+```bash:no-line-numbers
+npm i -ED vuepress@next
+npm i -ED cross-env rimraf @types/npm
+```
+
+<!--
+
+```bash
+npm i -ED vuepress@next vuepress-plugin-use-pages @vuepress/plugin-register-components @vuepress/plugin-search @vuepress/theme-default
+npm i -ED cross-env glob @types/npm rimraf
+```
+
+-->
+
+## Git ignore configuration
+
+Let's ignore IntelliJ IDEA NodeJS modules and VuePress temporal, cache and output folders and files in `.gitginore` file:
+
+```bash:no-line-numbers
+echo "/.idea/"            >> .gitignore
+echo "/.vuepress/.cache/" >> .gitignore
+echo "/.vuepress/.temp/"  >> .gitignore
+echo "/.vuepress/dist/"   >> .gitignore
+echo "/node_modules/"     >> .gitignore
+```
+
+## Add NPM scripts
+
+Update `package.json` file with next npm-scripts: 
+
+```json:no-line-numbers
+{
+  "scripts": {
+    "dev": "vuepress dev .",
+    "build": "vuepress build ."
+  }
+}
+```
+
+## Static resources
+
+Our site should looks unique, so we will require to add our photos, pictures or favicon logos...
+If you want to refer on some picture or any other resource by static path you should place that resource in `.vuepress/public` folder.
+For example I have 2 files I'm referring on: `favicon.ico` and `me-2020-11.jpeg` in that folder:
+
+```
+.vuepress/public
+├── favicon.ico
+└── me-2020-11.jpeg
+```
+
+## Site content
+
+Last missing peace we left to do is write our blog home page in user friendly [markdown](https://www.markdownguide.org/basic-syntax/)
+format (file with `.md` extensions). This will help us focus on a writing only and VuePress will take care of everything else: styles,
+positioning, fonts, highlighting, etc...
+
+```markdown
+---
+home: true
+heroImage: me-2020-11.jpeg
+heroText: Maksim Kostromin
+tagline: My VuePress 2.x blog
+features:
+- title: Easy
+  details: Minimal setup with markdown-centered project structure helps you focus on writing.
+- title: Flexible
+  details: Enjoy the dev experience of Vue + webpack, use Vue components in markdown, and develop custom themes with Vue.
+- title: Fast
+  details: VuePress generates pre-rendered static HTML for each page, and runs as an SPA once a page is loaded.
+---
+
+# Hello, World! [![GitHub Pages](https://github.com/daggerok/customized-vuepress-2-blog/actions/workflows/github-pages.yaml/badge.svg)](https://github.com/daggerok/customized-vuepress-2-blog/actions/workflows/github-pages.yaml)
+
+I'm Maksim! I do software engineering, music, love and peace...
+
+[This](https://github.com/daggerok) is my GitHub
+
+To be continue...
+```
+
+## Run and test
+
+Start developer server:
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:8080/](http://localhost:8080/) page to see results:
+
+<CodeGroup>
+  <CodeGroupItem title="white theme" active>
+
+![home page white theme](./home-page-white-theme.png)
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="dark theme">
+
+![home page dark theme](./home-page-dark-theme.png)
+
+  </CodeGroupItem>
+</CodeGroup>
+
+## Resources and links
+
+* [GitHub repository](https://github.com/daggerok/customized-vuepress-2-blog)
+* [VuePress 2.x site](https://v2.vuepress.vuejs.org/)

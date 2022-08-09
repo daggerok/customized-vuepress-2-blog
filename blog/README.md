@@ -1,7 +1,5 @@
----
-hero: false
----
-
 # Blog
 
 <Posts />
+
+To be continue...
