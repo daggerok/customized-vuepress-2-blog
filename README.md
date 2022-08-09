@@ -6,11 +6,12 @@ tagline: My VuePress 2.x blog
 actionText: Read blog →
 actionLink: /blog/README.md
 features:
-- title: easy
+- title: easy to start
   details: Minimal setup with markdown-centered project structure helps you focus on writing.
-- title: extensible, flexible
-  details: Enjoy the dev experience of Vue + webpack, use Vue components in markdown, and develop custom themes with Vue.
-- title: fast
+- title: extensible and flexible
+  details: Use Vue components in markdown, and develop custom themes with well known Vue. Enjoy the developer experience of Vue + webpack
+           or vite builders capabilities.
+- title: extremely fast!
   details: VuePress generates pre-rendered static HTML for each page, and runs as an SPA once a page is loaded.
 ---
 
@@ -19,7 +20,5 @@ features:
 I'm Maksim! I do software engineering, music, love and peace...
 
 [This](https://github.com/daggerok) is my GitHub
-
-To be continue...
 
 <Posts />

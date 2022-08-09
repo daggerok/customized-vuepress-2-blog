@@ -128,11 +128,12 @@ heroImage: me-2020-11.jpeg
 heroText: Maksim Kostromin
 tagline: My VuePress 2.x blog
 features:
-- title: Easy
+- title: easy to start
   details: Minimal setup with markdown-centered project structure helps you focus on writing.
-- title: Flexible
-  details: Enjoy the dev experience of Vue + webpack, use Vue components in markdown, and develop custom themes with Vue.
-- title: Fast
+- title: extensible and flexible
+  details: Use Vue components in markdown, and develop custom themes with well known Vue. Enjoy the developer experience of Vue + webpack
+           or vite builders capabilities.
+- title: extremely fast!
   details: VuePress generates pre-rendered static HTML for each page, and runs as an SPA once a page is loaded.
 ---
 
@@ -168,6 +169,14 @@ Open [http://localhost:8080/](http://localhost:8080/) page to see results:
 
   </CodeGroupItem>
 </CodeGroup>
+
+## TODO
+
+* CSS: Make home page picture in a circle
+* VuePress configure: Customize navbar
+* Next post: Add custom local theme with Layer and Footer registered components
+* Next post: Add more blog posts, use globs to autoconfigure blog sidebar and page plugin
+* Next post: Use page plugin to create custom reusable blog posts component to be used on home and blog pages
 
 ## Resources and links
 

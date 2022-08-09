@@ -5,6 +5,7 @@
       <Post :path="page.path" :title="page.title" />
     </p>
     <p v-if="!pages.length">TBD...</p>
+    <p>To be continue...</p>
   </div>
 </template>
 
