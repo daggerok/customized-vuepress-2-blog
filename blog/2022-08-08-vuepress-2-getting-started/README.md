@@ -111,7 +111,7 @@ Our site should looks unique, so we will require to add our photos, pictures or 
 If you want to refer on some picture or any other resource by static path you should place that resource in `.vuepress/public` folder.
 For example I have 2 files I'm referring on: `favicon.ico` and `me-2020-11.jpeg` in that folder:
 
-```
+```:no-line-numbers
 .vuepress/public
 ├── favicon.ico
 └── me-2020-11.jpeg
@@ -148,11 +148,14 @@ I'm Maksim! I do software engineering, music, love and peace...
 To be continue...
 ```
 
-## Run and test
+I won't be explaining in details what this configuration is doing, in most cases it should be obvious... But anyway, you can [go and read
+official documentation here](https://v2.vuepress.vuejs.org/reference/default-theme/frontmatter.html#home-page) if needed
+
+## Run dev server to test
 
 Start developer server:
 
-```bash
+```bash:no-line-numbers
 npm run dev
 ```
 
@@ -201,12 +204,310 @@ Let's check our browser on [http://localhost:8080/](http://localhost:8080/):
 
 Now it looks better 😎
 
+## Customize navbar
+
+One more think I wanted to mention is navbar configuration in VuePress. At the moment we don't have anything in our navbar except
+light / dark theme toggle, so let's configure it according to our needs...
+
+### Navbar title
+
+Let's start from title... In my `package.json` file I have description:
+
+```json:no-line-numbers
+{
+  "description": "Customized blog using VuePress 2.x"
+}
+```
+
+So I would like to use it as my blog title. To implement this I should create `.vuepress/config.ts` file and add necessary configuration:
+
+```typescript
+import { defineUserConfig } from 'vuepress';
+
+const { description: title } = require(`${process.cwd()}/package.json`);
+
+export default defineUserConfig({
+    title,
+});
+```
+
+Let's back to browser:
+
+<CodeGroup>
+  <CodeGroupItem title="light theme" active>
+
+![home page light theme with title](./home-page-light-theme-with-title.png)
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="dark theme">
+
+![home page dark theme with title](./home-page-dark-theme-with-title.png)
+
+  </CodeGroupItem>
+</CodeGroup>
+
+### Navbar links
+
+With time, we will have many other pages, maybe we will add _About_ page together with _Contacts_ and so on...
+
+#### Home page link
+
+At this point of time I think it would be nice to start from link to main _Home_ page, so any other links could be added latest similarly.
+Navbar bar links configuration also should be done in `.vuepress/config.ts` file:
+
+```typescript{1,7-11}
+import { defaultTheme, defineUserConfig } from 'vuepress';
+
+const { description: title } = require(`${process.cwd()}/package.json`);
+
+export default defineUserConfig({
+    title,
+    theme: defaultTheme({
+        navbar: [
+            { text: 'Home', link: '/' },
+        ],
+    }),
+});
+```
+
+Now let's check our browser:
+
+<CodeGroup>
+  <CodeGroupItem title="light theme" active>
+
+![home page light theme with home page navbar link](./home-page-light-theme-with-home-page-navbar-link.png)
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="dark theme">
+
+![home page dark theme with home page navbar link](./home-page-dark-theme-with-home-page-navbar-link.png)
+
+  </CodeGroupItem>
+</CodeGroup>
+
+#### GitHub repository link
+
+Additionally, we may want to share GitHub or GitLab repository where our blog source codes live. Even for ourselves it would be easier
+simply just click to GitHub link and quickly edit post if we would like to change something or fix some misspell... In  `config.ts` file
+we should tell VuePress our GitHub username and repository name. My repository FQDN URL in this case is
+[https://github.com/daggerok/customized-vuepress-2-blog](https://github.com/daggerok/customized-vuepress-2-blog), so I should use
+`daggerok/customized-vuepress-2-blog` part of it as `repo` value. It is enough to have GitHub navbar link, but I would like also specify
+`docsBranch` and `docsDir` values:
+
+```typescript{11-13}
+import { defaultTheme, defineUserConfig } from 'vuepress';
+
+const { description: title } = require(`${process.cwd()}/package.json`);
+
+export default defineUserConfig({
+    title,
+    theme: defaultTheme({
+        navbar: [
+            { text: 'Home', link: '/' },
+        ],
+        repo: 'daggerok/customized-vuepress-2-blog',
+        docsBranch: 'master',
+        docsDir: '.',
+    }),
+});
+```
+
+Now let's check our browser:
+
+<CodeGroup>
+  <CodeGroupItem title="light theme" active>
+
+![home page light theme with github navbar link](./home-page-light-theme-with-github-navbar-link.png)
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="dark theme">
+
+![home page dark theme with github navbar link](./home-page-dark-theme-with-github-navbar-link.png)
+
+  </CodeGroupItem>
+</CodeGroup>
+
+### Navbar search
+
+VuePress has awesome plugin: `@vuepress/plugin-search`, with that plugin we can quickly add basic search capabilities to our blog.
+Lets install it:
+
+```bash:no-line-numbers
+npm i -ED @vuepress/plugin-search@next
+```
+
+And configure, as usual in `config.ts` file:
+
+```typescript{2,16-18}
+import { defaultTheme, defineUserConfig } from 'vuepress';
+import { searchPlugin } from '@vuepress/plugin-search';
+
+const { description: title } = require(`${process.cwd()}/package.json`);
+
+export default defineUserConfig({
+    title,
+    theme: defaultTheme({
+        navbar: [
+            { text: 'Home', link: '/' },
+        ],
+        repo: 'daggerok/customized-vuepress-2-blog',
+        docsBranch: 'master',
+        docsDir: '.',
+    }),
+    plugins: [
+        searchPlugin(),
+    ],
+});
+```
+
+Cool! Now we can check our complete navbar with search functionality in action:
+
+<CodeGroup>
+  <CodeGroupItem title="light theme" active>
+
+![home page light theme with navbar search](./home-page-light-theme-with-navbar-search.png)
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="dark theme">
+
+![home page dark theme with navbar search](./home-page-dark-theme-with-navbar-search.png)
+
+  </CodeGroupItem>
+</CodeGroup>
+
+## Deployment
+
+We've done a lot so far 🤪
+It's time to let internet know about it 😁
+
+To do so:
+1. First of all, let's install required software:
+   ```bash:no-line-numbers
+   npm i -ED cross-env
+   ```
+   We will be using it to run our NPM-scripts with specific environment variable in cases when its needed
+2. Then let's add two npm-scripts into `pacjage.json` file:
+   ```json:no-line-numbers
+   {
+     "scripts": {
+       "build": "vuepress build .",
+       "build-github-pages": "cross-env BASE_HREF=/customized-vuepress-2-blog/ npm run build"
+     }
+   }
+   ```
+   Script `build` will optimize our build for production,
+   script `build-github-pages` will do same, but with `BASE_HREF` environment variable will be used in next point:
+3. Update our `.vuepress/config.ts` file like so:
+   ```typescript{4,7}
+   import { defaultTheme, defineUserConfig } from 'vuepress';
+   import { searchPlugin } from '@vuepress/plugin-search';
+   
+   const { name, description: title } = require(`${process.cwd()}/package.json`);
+   
+   export default defineUserConfig({
+       base: !process.env.BASE_HREF ? '/' : `/${name}/`,
+       title,
+       theme: defaultTheme({
+           navbar: [
+               { text: 'Home', link: '/' },
+           ],
+           repo: 'daggerok/customized-vuepress-2-blog',
+           docsBranch: 'master',
+           docsDir: '.',
+       }),
+       plugins: [
+           searchPlugin(),
+       ],
+   });
+   ```
+   Here we check if `BASE_HREF` env. variable wasn't passed, then we know that base must be `/`.
+   otherwise it should depends on our repository name, for example: `/customized-vuepress-2-blog/`
+4. Create GitHub repository if its not yet created, commit what we did so far and push all your blog source codes in here. For example into
+   [https://github.com/daggerok/customized-vuepress-2-blog](https://github.com/daggerok/customized-vuepress-2-blog) repository
+5. Next go to repository `Setting` tab, then click `Pages` manu on sidebar, then under `Build and deployment` section choose
+   `GitHub Actions` option:
+   ![pages build and deployment configuration using github-actions](./pages-build-and-deployment-using-github-actions.png)
+6. Last, but not least, create `.github/workflows/pages.yml` file with next content:
+   ```yaml
+   # Sample workflow for building and deploying a VuePress site to GitHub Pages
+   name: Deploy custom VuePress blog with GitHub Pages artifacts
+   # Runs on pushes targeting the default branch
+   on:
+     push:
+       branches: ["master"]
+     # Allows you to run this workflow manually from the Actions tab
+     workflow_dispatch:
+   # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+   permissions:
+     contents: read
+     pages: write
+     id-token: write
+   # Allow one concurrent deployment
+   concurrency:
+     group: "pages"
+     cancel-in-progress: true
+   # Use concrete NodeJS version:
+   env:
+     NODE_VERSION: 18.4.0
+   jobs:
+     # Build job:
+     build:
+       runs-on: ubuntu-latest
+       steps:
+         - uses: actions/checkout@v3
+         - name: Setup Pages
+           uses: actions/configure-pages@v1
+         - uses: actions/cache@v3
+           id: ci
+           with:
+             path: |
+               ~/.npm
+               ~/.node
+             key: ${{ runner.os }}-${{ hashFiles('**/package.json', '**/package-lock.json') }}
+         - uses: actions/setup-node@v3
+           with:
+             node-version: ${{ env.NODE_VERSION }}
+         - run: npm i -E
+         - run: npm run build-github-pages
+         - name: Upload artifact
+           uses: actions/upload-pages-artifact@v1
+           with:
+             path: '.vuepress/dist'
+     # Deployment job:
+     deploy:
+       environment:
+         name: github-pages
+         url: ${{ steps.deployment.outputs.page_url }}
+       runs-on: ubuntu-latest
+       needs: build
+       steps:
+         - name: Deploy to GitHub Pages
+           id: deployment
+           uses: actions/deploy-pages@v1
+   ```
+   This GitHub action contains two jobs: one for project artifact build + upload and another for its deployment on any master branch push
+7. Commit and push changes from previous step and wait for CI completion. Afterall, you should see your awesome customized VuePress blog
+   gets published, for example here:
+   [https://daggerok.github.io/customized-vuepress-2-blog/](https://daggerok.github.io/customized-vuepress-2-blog/)
+
+Congrats! 🎉💪👏
+
+<!--
+
 ## TODO
+
 * Next post: Add custom local theme with Layer and Footer registered components
 * Next post: Add more blog posts, use globs to autoconfigure blog sidebar and page plugin
 * Next post: Use page plugin to create custom reusable blog posts component to be used on home and blog pages
+* Next post: [Add multi-language support](https://v2.vuepress.vuejs.org/guide/i18n.html)
 
-## Resources and links
+-->
+
+## Useful links
 
 * [GitHub repository](https://github.com/daggerok/customized-vuepress-2-blog)
 * [VuePress 2.x site](https://v2.vuepress.vuejs.org/)
