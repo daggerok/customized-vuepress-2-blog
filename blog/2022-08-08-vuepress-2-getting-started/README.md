@@ -174,7 +174,6 @@ Open [http://localhost:8080/](http://localhost:8080/) page to see results:
 
 ## TODO
 
-* Fix images to be without GitHub actions badge
 * CSS: Make home page picture in a circle
 * VuePress configure: Customize navbar
 * Next post: Add custom local theme with Layer and Footer registered components
