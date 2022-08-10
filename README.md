@@ -15,7 +15,7 @@ features:
   details: VuePress generates pre-rendered static HTML for each page, and runs as an SPA once a page is loaded.
 ---
 
-# Hello, World! [![GitHub Pages](https://github.com/daggerok/customized-vuepress-2-blog/actions/workflows/github-pages.yaml/badge.svg)](https://github.com/daggerok/customized-vuepress-2-blog/actions/workflows/github-pages.yaml)
+# Hello, World! [![GitHub Pages](https://github.com/daggerok/customized-vuepress-2-blog/actions/workflows/ci.yaml/badge.svg)](https://github.com/daggerok/customized-vuepress-2-blog/actions/workflows/ci.yaml)
 
 I'm Maksim! I do software engineering, music, love and peace...
 
