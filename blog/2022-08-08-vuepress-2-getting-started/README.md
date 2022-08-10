@@ -31,6 +31,8 @@ scoop install nodejs
   </CodeGroupItem>
 </CodeGroup>
 
+<!-- See: https://v2.vuepress.vuejs.org/reference/default-theme/components.html#codegroupitem -->
+
 ::: tip
 See more options [here](https://nodejs.org/uk/download/package-manager/)
 :::

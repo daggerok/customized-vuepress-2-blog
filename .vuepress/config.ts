@@ -9,8 +9,6 @@ const { name, description } = require(`${process.cwd()}/package.json`)
 
 const themeConfig = {
     title: description,
-    docsBranch: 'master',
-    docsDir: '.',
     displayAllHeaders: true,
     mediumZoom: true,
     backToHome: true,
@@ -38,7 +36,10 @@ export default defineUserConfig({
     ...themeConfig,
     base: !process.env.BASE_HREF ? '/' : `/${name}/`,
     theme: localTheme({
-        repo: name,
+        // See: https://v2.vuepress.vuejs.org/reference/default-theme/config.html#repo
+        repo: `daggerok/${name}`, // repo: `https://github.com/daggerok/${name}`,
+        docsBranch: 'master',
+        docsDir: '.',
         lastUpdated: true,
         sidebar: blogSidebar,
         // default theme options

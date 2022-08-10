@@ -1,3 +1,5 @@
+<!-- See: https://v2.vuepress.vuejs.org/reference/default-theme/extending.html#layout-slots -->
+
 <script setup>
 import ParentLayout from '@vuepress/theme-default/lib/client/layouts/Layout.vue';
 import Footer from '@/components/Footer.vue';

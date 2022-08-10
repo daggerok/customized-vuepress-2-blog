@@ -1,3 +1,4 @@
+// see: https://v2.vuepress.vuejs.org/reference/default-theme/extending.html#layout-slots
 import type { Theme } from '@vuepress/core';
 import { defaultTheme } from '@vuepress/theme-default';
 import type { DefaultThemeOptions } from '@vuepress/theme-default';
