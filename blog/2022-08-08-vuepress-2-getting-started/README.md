@@ -159,9 +159,9 @@ npm run dev
 Open [http://localhost:8080/](http://localhost:8080/) page to see results:
 
 <CodeGroup>
-  <CodeGroupItem title="white theme" active>
+  <CodeGroupItem title="light theme" active>
 
-![home page white theme](./home-page-white-theme.png)
+![home page light theme](./home-page-light-theme.png)
 
   </CodeGroupItem>
 
@@ -172,10 +172,36 @@ Open [http://localhost:8080/](http://localhost:8080/) page to see results:
   </CodeGroupItem>
 </CodeGroup>
 
-## TODO
+## Custom styling
 
-* CSS: Make home page picture in a circle
-* VuePress configure: Customize navbar
+Currently, home page picture looking nice, but we would like to style it a bit. Let's change that picture from square to circle.
+To do so, we should add `.vuepress/styles/index.scss` with next context:
+
+```scss
+main > header > img {
+  border-radius: 50%;
+}
+```
+
+Let's check our browser on [http://localhost:8080/](http://localhost:8080/):
+
+<CodeGroup>
+  <CodeGroupItem title="light theme" active>
+
+![home page light theme with circle logo](./home-page-light-theme-with-circle-logo.png)
+
+  </CodeGroupItem>
+
+  <CodeGroupItem title="dark theme">
+
+![home page dark theme with circle logo](./home-page-dark-theme-with-circle-logo.png)
+
+  </CodeGroupItem>
+</CodeGroup>
+
+Now it looks better 😎
+
+## TODO
 * Next post: Add custom local theme with Layer and Footer registered components
 * Next post: Add more blog posts, use globs to autoconfigure blog sidebar and page plugin
 * Next post: Use page plugin to create custom reusable blog posts component to be used on home and blog pages
