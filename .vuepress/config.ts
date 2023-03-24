@@ -5,7 +5,9 @@ import { searchPlugin } from '@vuepress/plugin-search';
 import { registerComponentsPlugin } from '@vuepress/plugin-register-components';
 import { localTheme } from './theme';
 
-const { name, description } = require(`${process.cwd()}/package.json`)
+// @ts-ignore // const { name, description } = require(`${process.cwd()}/package.json`)
+const getPackageJsonFile = await import('../package.json', { assert: { type: 'json' } });
+const { name, description } = getPackageJsonFile.default;
 
 const themeConfig = {
     title: description,
@@ -67,7 +69,7 @@ export default defineUserConfig({
         }),
     ],
     alias: { // import MyFooter from '@/components/MyFooter.vue'
-        '@': require('path').resolve(process.cwd(), '.vuepress'),
+        '@': path.resolve(process.cwd(), '.vuepress'),
     },
     // define: {
     //     __MARKDOWN_BLOG_FILES__: blogSidebar,
