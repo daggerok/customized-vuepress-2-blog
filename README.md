@@ -30,4 +30,5 @@ RTFM:
 * [VuePress 2.x site](https://v2.vuepress.vuejs.org/)
 * [Categories and Tags](https://www.bluleadz.com/blog/what-are-blog-tags-and-how-to-use-them)
 * [VuePress Metadata](https://www.adamdehaven.com/blog/how-to-add-metadata-canonical-urls-and-structured-data-to-your-vuepress-site/#update-the-vuepress-themeconfig)
+* [VuePress changelog](https://github.com/vuepress/vuepress-next/blob/main/CHANGELOG.md)
 -->
