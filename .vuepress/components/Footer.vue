@@ -1,6 +1,5 @@
 <template>
-  <div class="footer"> Maksim Kostromin © 2022-present</div>
-  <div class="footer">Please, make sure to copyright me 🙃</div>
+  <div class="footer"> Maksim Kostromin © 2022-present 🙃</div>
 </template>
 
 <script>
@@ -18,7 +17,7 @@ export default defineComponent({
     width: 100%;
     height: 3rem;
     min-height: 2rem;
-    margin-top: -2rem;
+    margin-top: -3rem;
     border-top: none !important;
   }
 </style>

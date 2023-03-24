@@ -1,16 +1,21 @@
-// see: https://v2.vuepress.vuejs.org/reference/default-theme/extending.html#layout-slots
 import type { Theme } from '@vuepress/core';
-import { defaultTheme } from '@vuepress/theme-default';
-import type { DefaultThemeOptions } from '@vuepress/theme-default';
-import { path } from '@vuepress/utils';
+import { defaultTheme, type DefaultThemeOptions } from '@vuepress/theme-default';
+import { getDirname, path } from '@vuepress/utils';
 
-export const localTheme = (options: DefaultThemeOptions): Theme => {
+// @ts-ignore
+const __dirname = getDirname(import.meta.url)
+
+export const myBlogLocalTheme = (options: DefaultThemeOptions): Theme => {
     return {
         name: 'vuepress-theme-local',
         extends: defaultTheme(options),
-        layouts: {
-            Layout: path.resolve(__dirname, 'layouts/Layout.vue'),
-            404: path.resolve(__dirname, 'layouts/Layout.vue'),
+
+        // override layouts in child theme's client config file:
+        clientConfigFile: path.resolve(__dirname, './client.ts'),
+
+        // override component alias (do not forget to remove alias configuration from config.ts file):
+        alias: {
+            '@': path.resolve(__dirname, '..'),
         },
     };
-}
+};

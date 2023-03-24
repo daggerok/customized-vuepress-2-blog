@@ -1,14 +1,17 @@
-import { path } from '@vuepress/utils';
-import { AppConfig, defineUserConfig, viteBundler } from 'vuepress';
+import { getDirname, path } from '@vuepress/utils';
+import { defineUserConfig, viteBundler } from 'vuepress';
 import { usePagesPlugin } from 'vuepress-plugin-use-pages';
 import { searchPlugin } from '@vuepress/plugin-search';
 import { registerComponentsPlugin } from '@vuepress/plugin-register-components';
-import { localTheme } from './theme';
+
+// @ts-ignore
+const __dirname = getDirname(import.meta.url);
 
 // @ts-ignore // const { name, description } = require(`${process.cwd()}/package.json`)
 const getPackageJsonFile = await import('../package.json', { assert: { type: 'json' } });
 const { name, description } = getPackageJsonFile.default;
 
+import { myBlogLocalTheme } from './theme';
 const themeConfig = {
     title: description,
     displayAllHeaders: true,
@@ -37,7 +40,7 @@ const firstBlogPath = blogSidebar.find((value, index, array) => value != blogPag
 export default defineUserConfig({
     ...themeConfig,
     base: !process.env.BASE_HREF ? '/' : `/${name}/`,
-    theme: localTheme({
+    theme: myBlogLocalTheme({
         // See: https://v2.vuepress.vuejs.org/reference/default-theme/config.html#repo
         repo: `daggerok/${name}`, // repo: `https://github.com/daggerok/${name}`,
         docsBranch: 'master',
@@ -68,9 +71,7 @@ export default defineUserConfig({
             // options
         }),
     ],
-    alias: { // import MyFooter from '@/components/MyFooter.vue'
-        '@': path.resolve(process.cwd(), '.vuepress'),
-    },
+
     // define: {
     //     __MARKDOWN_BLOG_FILES__: blogSidebar,
     // },
