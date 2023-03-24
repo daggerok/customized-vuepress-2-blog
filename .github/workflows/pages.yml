@@ -17,7 +17,7 @@ concurrency:
   cancel-in-progress: true
 # Use concrete NodeJS version:
 env:
-  NODE_VERSION: 18.4.0
+  NODE_VERSION: 19.7.0
 # Jobs:
 jobs:
   # Build job:
