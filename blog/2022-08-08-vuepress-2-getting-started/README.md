@@ -226,7 +226,7 @@ import { defineUserConfig } from 'vuepress';
 
 // @ts-ignore // const { name, description } = require(`${process.cwd()}/package.json`)
 const getPackageJsonFile = await import('../package.json', { assert: { type: 'json' } });
-const { name, description } = getPackageJsonFile.default;
+const { description } = getPackageJsonFile.default;
 
 export default defineUserConfig({
     title: description,
@@ -258,11 +258,11 @@ With time, we will have many other pages, maybe we will add _About_ page togethe
 At this point of time I think it would be nice to start from link to main _Home_ page, so any other links could be added latest similarly.
 Navbar bar links configuration also should be done in `.vuepress/config.ts` file:
 
-```typescript{1,7-11}
+```typescript{1,8-11}
 import { defaultTheme, defineUserConfig } from 'vuepress';
 
 const getPackageJsonFile = await import('../package.json', { assert: { type: 'json' } });
-const { name, description: title } = getPackageJsonFile.default;
+const { description: title } = getPackageJsonFile.default;
 
 export default defineUserConfig({
     title,
@@ -299,10 +299,11 @@ we should tell VuePress our GitHub username and repository name. My repository F
 `daggerok/customized-vuepress-2-blog` part of it as `repo` value. It is enough to have GitHub navbar link, but I would like also specify
 `docsBranch` and `docsDir` values:
 
-```typescript{11-13}
+```typescript{12-14}
 import { defaultTheme, defineUserConfig } from 'vuepress';
 
-const { description: title } = require(`${process.cwd()}/package.json`);
+const getPackageJsonFile = await import('../package.json', { assert: { type: 'json' } });
+const { description: title } = getPackageJsonFile.default;
 
 export default defineUserConfig({
     title,
@@ -344,11 +345,11 @@ npm i -ED @vuepress/plugin-search@next
 
 And configure, as usual in `config.ts` file:
 
-```typescript{2,16-18}
-import { defaultTheme, defineUserConfig } from 'vuepress';
+```typescript{1,16-18}
 import { searchPlugin } from '@vuepress/plugin-search';
 
-const { description: title } = require(`${process.cwd()}/package.json`);
+const getPackageJsonFile = await import('../package.json', { assert: { type: 'json' } });
+const { name, description: title } = getPackageJsonFile.default;
 
 export default defineUserConfig({
     title,
@@ -405,26 +406,13 @@ To do so:
    Script `build` will optimize our build for production,
    script `build-github-pages` will do same, but with `BASE_HREF` environment variable will be used in next point:
 3. Update our `.vuepress/config.ts` file like so:
-   ```typescript{4,7}
-   import { defaultTheme, defineUserConfig } from 'vuepress';
-   import { searchPlugin } from '@vuepress/plugin-search';
-   
+   ```typescript{1,4}
    const { name, description: title } = require(`${process.cwd()}/package.json`);
    
    export default defineUserConfig({
        base: !process.env.BASE_HREF ? '/' : `/${name}/`,
        title,
-       theme: defaultTheme({
-           navbar: [
-               { text: 'Home', link: '/' },
-           ],
-           repo: 'daggerok/customized-vuepress-2-blog',
-           docsBranch: 'master',
-           docsDir: '.',
-       }),
-       plugins: [
-           searchPlugin(),
-       ],
+       // other part is skipped...
    });
    ```
    Here we check if `BASE_HREF` env. variable wasn't passed, then we know that base must be `/`.
