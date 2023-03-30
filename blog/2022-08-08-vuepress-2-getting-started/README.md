@@ -485,11 +485,103 @@ To do so:
    gets published, for example here:
    [https://daggerok.github.io/customized-vuepress-2-blog/](https://daggerok.github.io/customized-vuepress-2-blog/)
 
+## Create custom components
+
+Let's say we wanna custom `Footer` which can be easily used in our pages or components, just like so:
+
+```markdown
+# My post
+
+My content....
+
+<Footer />
+```
+
+Create component folder: `.vuepress/components/layers`
+
+<CodeGroup>
+  <CodeGroupItem title="Unix bash" active>
+
+```bash:no-line-numbers
+mkdir .vuepress/components
+```
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Windows batch">
+
+```batch:no-line-numbers
+mkdir .vuepress\components
+```
+  </CodeGroupItem>
+</CodeGroup>
+
+Create `.vuepress/components/Footer.vue` component:
+
+```vue
+<template>
+  <div class="footer"> Maksim Kostromin © 2022-present 🙃</div>
+</template>
+
+<script>
+import { defineComponent } from 'vue';
+export default defineComponent({
+  name: 'Footer',
+});
+</script>
+
+<style scoped lang="scss">
+div.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 3rem;
+  min-height: 2rem;
+  margin-top: -3rem;
+  border-top: none !important;
+}
+</style>
+```
+
+Now we should help VuePress to register our components.
+
+Install `@vuepress/plugin-register-components` package:
+
+```bash
+npm i -ED @vuepress/plugin-register-components@next
+```
+
+And finally update our `.vuepress/index.ts` file:
+
+```typescript{2,8-10}
+import { getDirname, path } from '@vuepress/utils';
+import { registerComponentsPlugin } from '@vuepress/plugin-register-components';
+
+const __dirname = getDirname(import.meta.url);
+
+export default defineUserConfig({
+  plugins: [
+    registerComponentsPlugin({
+      componentsDir: path.resolve(__dirname, './components'),
+    }),
+  ],
+  
+  // ...skipped after...
+});
+```
+
+Now we can used our `Footer` directly in markdown files or import it in our vue components just like so:
+
+```typescript
+import Footer from '@/components/Footer.vue';
+```
+
 ## Add custom local theme
 
-We need custom `Layer` and `Footer`, for this we must create our own custom local theme.
+Let'e imagine we want to have our blog unique, so we've decide to add our custom `Footer` component for every page
+in our blog... To do so we must create our own custom local theme.
 
-Create folders `.vuepress/theme` and `.vuepress/theme/layers`:
+Let's create folders `.vuepress/theme` and `.vuepress/theme/layers` which will contains custom theme files:
 
 <CodeGroup>
   <CodeGroupItem title="Unix bash" active>
