@@ -485,13 +485,120 @@ To do so:
    gets published, for example here:
    [https://daggerok.github.io/customized-vuepress-2-blog/](https://daggerok.github.io/customized-vuepress-2-blog/)
 
+## Add custom local theme
+
+We need custom `Layer` and `Footer`, for this we must create our own custom local theme.
+
+Create folders `.vuepress/theme` and `.vuepress/theme/layers`:
+
+<CodeGroup>
+  <CodeGroupItem title="Unix bash" active>
+
+```bash:no-line-numbers
+mkdir .vuepress/theme
+mkdir .vuepress/theme/layers
+```
+  </CodeGroupItem>
+
+  <CodeGroupItem title="Windows batch">
+
+```batch:no-line-numbers
+mkdir .vuepress\theme
+mkdir .vuepress\theme\layers
+```
+  </CodeGroupItem>
+</CodeGroup>
+
+Create `.vuepress/theme/layers/Layout.vue` layout:
+
+```vue
+<script setup>
+import ParentLayout from '@vuepress/theme-default/lib/client/layouts/Layout.vue';
+import Footer from '@/components/Footer.vue';
+</script>
+
+<template>
+  <div class="wrapper">
+    <div class="content-wrapping-section">
+      <ParentLayout/>
+    </div>
+    <div class="footer">
+      <Footer/>
+    </div>
+  </div>
+</template>
+```
+
+Create `.vuepress/theme/client.ts` file:
+
+```typescript
+import { defineClientConfig } from '@vuepress/client';
+import Layout from './layouts/Layout.vue';
+
+export default defineClientConfig({
+    layouts: {
+        Layout,
+        NotFound: Layout,
+    },
+});
+```
+
+Create `.vuepress/theme/index.ts` file:
+
+```typescript
+import type { Theme } from '@vuepress/core';
+import { defaultTheme, type DefaultThemeOptions } from '@vuepress/theme-default';
+import { getDirname, path } from '@vuepress/utils';
+
+const __dirname = getDirname(import.meta.url)
+
+export const myBlogLocalTheme = (options: DefaultThemeOptions): Theme => {
+   return {
+      name: 'vuepress-theme-local',
+      extends: defaultTheme(options),
+
+      // override layouts in child theme's client config file:
+      clientConfigFile: path.resolve(__dirname, './client.ts'),
+
+      // add component alias. Usage:
+      // import { MyComponent } from '@/components/MyComponent';
+      // it will import component from .vuepress/components/MyComponent.vue file
+      alias: {
+         '@': path.resolve(__dirname, '..'),
+      },
+   };
+};
+```
+
+Now update `.vuepress/config.ts` file accordingly to use it in your VuePress blog:
+
+```typescript{3,6,13}
+// ...skipped before...
+
+import { myBlogLocalTheme } from './theme';
+
+export default defineUserConfig({
+  theme: myBlogLocalTheme({
+    navbar: [
+      { text: 'Home', link: '/' },
+    ],
+    repo: 'daggerok/customized-vuepress-2-blog',
+    docsBranch: 'master',
+    docsDir: '.',
+  }),
+
+  // ...skipped after...
+});
+```
+
+See: [Official extending section](https://v2.vuepress.vuejs.org/reference/default-theme/extending.html#layout-slots) for more details
+
 Congrats! 🎉💪👏
 
 <!--
 
 ## TODO
 
-* Next post: Add custom local theme with Layer and Footer registered components
 * Next post: Add more blog posts, use globs to autoconfigure blog sidebar and page plugin
 * Next post: Use page plugin to create custom reusable blog posts component to be used on home and blog pages
 * Next post: [Add multi-language support](https://v2.vuepress.vuejs.org/guide/i18n.html)
