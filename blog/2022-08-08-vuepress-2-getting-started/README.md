@@ -224,10 +224,12 @@ So I would like to use it as my blog title. To implement this I should create `.
 ```typescript
 import { defineUserConfig } from 'vuepress';
 
-const { description: title } = require(`${process.cwd()}/package.json`);
+// @ts-ignore // const { name, description } = require(`${process.cwd()}/package.json`)
+const getPackageJsonFile = await import('../package.json', { assert: { type: 'json' } });
+const { name, description } = getPackageJsonFile.default;
 
 export default defineUserConfig({
-    title,
+    title: description,
 });
 ```
 
