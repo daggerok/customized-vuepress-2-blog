@@ -261,7 +261,8 @@ Navbar bar links configuration also should be done in `.vuepress/config.ts` file
 ```typescript{1,7-11}
 import { defaultTheme, defineUserConfig } from 'vuepress';
 
-const { description: title } = require(`${process.cwd()}/package.json`);
+const getPackageJsonFile = await import('../package.json', { assert: { type: 'json' } });
+const { name, description: title } = getPackageJsonFile.default;
 
 export default defineUserConfig({
     title,
