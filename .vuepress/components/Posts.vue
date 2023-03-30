@@ -4,8 +4,9 @@
     <p v-if="pages.length" v-for="page in pages">
       <Post :path="page.path" :title="page.title" />
     </p>
-    <p v-if="!pages.length">TBD...</p>
-    <p>To be continue...</p>
+    <p v-if="!pages.length">
+      To be continue...
+    </p>
   </div>
 </template>
 
