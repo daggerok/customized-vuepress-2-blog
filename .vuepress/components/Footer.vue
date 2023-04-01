@@ -13,11 +13,8 @@ export default defineComponent({
   div.footer {
     display: flex;
     justify-content: center;
-    align-items: center;
     width: 100%;
-    height: 3rem;
-    min-height: 2rem;
-    margin-top: -3rem;
+    min-height: 3rem;
     border-top: none !important;
   }
 </style>

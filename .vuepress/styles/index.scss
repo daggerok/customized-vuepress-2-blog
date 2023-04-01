@@ -9,7 +9,7 @@ main > header > img {
 // fix with for non main / home pages:
 
 main.page {
-  min-height: 90vh !important;
+  min-height: 85vh !important;
   .theme-default-content {
     min-width: 80vw;
   }
@@ -17,7 +17,7 @@ main.page {
 
 @media screen and (min-width: 1500px) {
   main.page {
-    min-height: 90vh !important;
+    min-height: 85vh !important;
     .theme-default-content {
       min-width: 75vw;
     }
@@ -26,7 +26,7 @@ main.page {
 
 @media screen and (max-width: 1499px) {
   main.page {
-    min-height: 90vh !important;
+    min-height: 85vh !important;
     .theme-default-content {
       min-width: 70vw;
     }
@@ -35,7 +35,7 @@ main.page {
 
 @media screen and (max-width: 1200px) {
   main.page {
-    min-height: 90vh !important;
+    min-height: 85vh !important;
     .theme-default-content {
       min-width: 65vw;
     }
@@ -44,7 +44,7 @@ main.page {
 
 @media screen and (max-width: 1000px) {
   main.page {
-    min-height: 90vh !important;
+    min-height: 85vh !important;
     .theme-default-content {
       min-width: 60vw;
     }
@@ -53,7 +53,7 @@ main.page {
 
 @media screen and (max-width: 768px) {
   main.page {
-    min-height: 90vh !important;
+    min-height: 85vh !important;
     .theme-default-content {
       min-width: 55vw;
     }
