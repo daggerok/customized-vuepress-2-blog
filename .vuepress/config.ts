@@ -1,5 +1,5 @@
 import { getDirname, path } from '@vuepress/utils';
-import { defineUserConfig } from 'vuepress';
+import { defineUserConfig, viteBundler } from 'vuepress';
 import { usePagesPlugin } from 'vuepress-plugin-use-pages';
 import { searchPlugin } from '@vuepress/plugin-search';
 import { registerComponentsPlugin } from '@vuepress/plugin-register-components';
@@ -20,7 +20,7 @@ const themeConfig = {
     nprogress: true,
 };
 
-import glob from 'glob';
+import * as glob from 'glob';
 const rootPath = path.resolve(__dirname, '..');
 const blogPath = path.resolve(rootPath, 'blog');
 const blogSidebar = glob.sync(`${blogPath}/**/*.md`)
@@ -53,6 +53,7 @@ export default defineUserConfig({
             { text: 'Blog', link: firstBlogPath || '/blog/' },
         ],
     }),
+    bundler: viteBundler(), // required by plugins => usePagesPlugin
     plugins: [
         usePagesPlugin({ // see: https://github.com/monsat/vuepress-plugin-use-pages
             filter: (page) => page.title !== 'Blog', // fetch non README.md (title: '# Blog') posts
