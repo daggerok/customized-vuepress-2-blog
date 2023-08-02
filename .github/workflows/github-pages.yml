@@ -1,0 +1,41 @@
+name: github-pages
+on:
+  workflow_dispatch:
+    inputs:
+      trigger:
+        description: Type m to trigger manual jobs
+        required: false
+        default: ''
+  push:
+    branches: ['master']
+  pull_request:
+permissions:
+  contents: write
+env:
+  NODE_VERSION: 19.7.0
+jobs:
+  github-pages:
+    if: github.event.inputs.trigger == ''
+      || !startsWith(github.event.inputs.trigger, 'm')
+      || !startsWith(github.event.inputs.trigger, 'M')
+    concurrency: ci-${{ github.ref }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+      - uses: actions/cache@v3
+        id: cache
+        with:
+          path: |
+            ~/.n*
+          key: ${{ runner.os }}-${{ hashFiles('**/package.json', '**/package-lock.json') }}
+      - run: npm i -E
+      - run: npm run build-github-pages
+      - name: Deploy 🚀 GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: .vuepress/dist
+          branch: gh-pages
+          clean: true
