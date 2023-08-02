@@ -3,3 +3,4 @@
 /.vuepress/.temp/
 /.vuepress/dist/
 /node_modules/
+.DS_Store
